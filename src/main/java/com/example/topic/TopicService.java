@@ -1,4 +1,4 @@
-package topic;
+package com.example.topic;
 
 import org.springframework.stereotype.Service;
 

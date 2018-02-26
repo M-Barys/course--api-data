@@ -1,4 +1,4 @@
-package topic;
+package com.example.topic;
 
 public class Topic {
 
