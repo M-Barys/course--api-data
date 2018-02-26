@@ -1,10 +1,18 @@
 package com.example.topic;
 
+import com.example.data.TopicStore;
+import com.example.data.TopicStoreRepository;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.google.common.collect.Streams;
 
 @Service
 public class TopicService {
@@ -15,8 +23,18 @@ public class TopicService {
             new Topic("javascript", "JavaScript", "JavaScript Description")
     ));
 
+    @Autowired
+    private TopicStoreRepository topicStoreRepository;
+
     public List<Topic> getAllTopics() {
-        return topics;
+        Iterable<TopicStore> allIter = topicStoreRepository.findAll();
+
+        List<Topic> topicList = Streams.stream(allIter)
+                .map(ts -> ts.createTopic())
+                .collect(Collectors.toList());
+
+        return topicList;
+
     }
 
     public Topic getTopic(String id){
@@ -24,7 +42,8 @@ public class TopicService {
     }
 
     public void addTopic(Topic topic){
-        topics.add(topic);
+        TopicStore topicStore = TopicStore.fromTopic(topic);
+        topicStoreRepository.save(topicStore);
     }
 
     public void updateTopic(String id, Topic topic) {
