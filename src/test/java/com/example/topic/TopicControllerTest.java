@@ -43,6 +43,10 @@ public class TopicControllerTest {
             topic.setDescription("new Description");
             topicController.updateTopic(topic,"1"+1);
 
+            //get single topic
+            topicController.getTopic("1"+1);
+            
+
         //Then
         List<Topic> allTopics = topicController.getAllTopics();
         System.out.println(allTopics.toString());
