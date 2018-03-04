@@ -24,7 +24,7 @@ public class TopicControllerTest {
         //Given
         for(int i=1 ; i<6; i++ ) {
             Topic topic = new Topic();
-            topic.setId("1"+i);
+            topic.setId((long) i);
             topic.setName("name");
             topic.setDescription("desc");
 
@@ -33,15 +33,15 @@ public class TopicControllerTest {
             System.out.println(topic.toString());
         }
 
-            topicController.deleteTopic("1"+4);
+            topicController.deleteTopic((long) 4);
             List<Topic> allTopicsD =topicController.getAllTopics();
             System.out.println(allTopicsD.toString());
 
             Topic topic = new Topic();
-            topic.setId("1"+1);
+            topic.setId((long) 1);
             topic.setName("new Name");
             topic.setDescription("new Description");
-            topicController.updateTopic(topic,"1"+1);
+            topicController.updateTopic(topic, (long) 1);
 
         //Then
         List<Topic> allTopics = topicController.getAllTopics();
