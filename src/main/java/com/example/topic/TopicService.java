@@ -28,7 +28,6 @@ public class TopicService {
         topicRepository.save(topic);
     }
 
-
     public void updateTopic(Long id, Topic topic) {
         topicRepository.save(topic);
     }

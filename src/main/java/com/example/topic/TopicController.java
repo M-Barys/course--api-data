@@ -1,11 +1,13 @@
 package com.example.topic;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class TopicController {
 
   @Autowired
@@ -16,6 +18,17 @@ public class TopicController {
     public List<Topic> getAllTopics(){
         return topicService.getAllTopics();
     }
+
+    @GetMapping("/topics")
+    public String todoform(Model model){
+        model.addAttribute("todoform",new Topic());
+        return "todoform";
+    }
+
+//    @RequestMapping(value = "/topics",method = RequestMethod.GET)
+//    public String todoform(){
+//        return "todoform";
+//    }
 
     @RequestMapping("/topics/{id}")
     public Topic getTopic(@PathVariable Long id){

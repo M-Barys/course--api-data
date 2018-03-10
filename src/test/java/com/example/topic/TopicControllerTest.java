@@ -44,7 +44,7 @@ public class TopicControllerTest {
             topicController.updateTopic(topic, (long) 1);
 
             //get single topic
-            topicController.getTopic("1"+1);
+            topicController.getTopic((long)1);
             
 
         //Then

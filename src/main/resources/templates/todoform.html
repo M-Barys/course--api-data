@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head lang = "en">
+    <meta charset="UTF-8"/>
+    <title>My todo list</title>
+</head>
+<body>
+    <h1>Form</h1>
+    <form th:object="${topic}" method="post">
+        <p>Id: <input type="text" th:field="*{id}"/></p>
+        <p>Name: <input type="text" th:field="*{name}"/></p>
+        <p>Description: <input type="text" th:field="*{description}"/></p>
+        <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+    </form>
+</body>
+</html>
