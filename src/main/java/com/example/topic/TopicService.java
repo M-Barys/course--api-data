@@ -1,10 +1,10 @@
 package com.example.topic;
 
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -14,10 +14,7 @@ public class TopicService {
     private TopicRepository topicRepository;
 
     public List<Topic> getAllTopics() {
-        List<Topic> topics = new ArrayList<>();
-        topicRepository.findAll()
-                .forEach(topics::add);
-        return topics;
+        return Lists.newArrayList(topicRepository.findAll());
     }
 
     public Topic getTopic(Long id){
