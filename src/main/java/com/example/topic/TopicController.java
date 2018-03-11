@@ -14,40 +14,41 @@ public class TopicController {
   private TopicService topicService;
 
 
-    @RequestMapping("/topics")
-    public List<Topic> getAllTopics(){
-        return topicService.getAllTopics();
-    }
-
     @GetMapping("/topics")
     public String todoform(Model model){
-        model.addAttribute("todoform",new Topic());
+        model.addAttribute("topic",new Topic());
         return "todoform";
     }
 
-//    @RequestMapping(value = "/topics",method = RequestMethod.GET)
-//    public String todoform(){
-//        return "todoform";
-//    }
+    @PostMapping("/topics")
+    public String addTopic(@ModelAttribute Topic topic){
+        topicService.addTopic(topic);
+        return "creationok";
+    }
+
+    @RequestMapping("/todolist")
+    public String getAllTopics(Model model){
+        model.addAttribute("topics", topicService.getAllTopics());
+        return "todo";
+    }
 
     @RequestMapping("/topics/{id}")
     public Topic getTopic(@PathVariable Long id){
         return topicService.getTopic(id);
     }
 
-    @RequestMapping(method= RequestMethod.POST, value="/topics")
-    public void addTopic(@RequestBody Topic topic){
-        topicService.addTopic(topic);
-    }
-
-    @RequestMapping(method= RequestMethod.PUT, value="/topics/{id}")
+    @RequestMapping(method =RequestMethod.PUT, value="/topics/{id}")
     public void updateTopic(@RequestBody Topic topic, @PathVariable Long id){
         topicService.updateTopic(id, topic);
+
     }
 
-    @RequestMapping(method= RequestMethod.DELETE, value="/topics/{id}")
-    public void deleteTopic(@PathVariable Long id) {
+    @RequestMapping("/topics/delete/{id}")
+    public String deleteTopic(@PathVariable Long id, Model model) {
         topicService.deleteTopic(id);
+
+        model.addAttribute("topics", topicService.getAllTopics());
+        return "todo";
     }
 
 }
