@@ -28,10 +28,10 @@ public class TopicControllerTest {
             topic.setName("name");
             topic.setDescription("desc");
 
-            //When
-            topicController.addTopic(topic);
-            System.out.println(topic.toString());
-        }
+//            //When
+//            topicController.addTopic(topic);
+//            System.out.println(topic.toString());
+       }
 
             //topicController.deleteTopic((long) 4);
             //List<Topic> allTopicsD =topicController.getAllTopics();
@@ -44,7 +44,7 @@ public class TopicControllerTest {
             //topicController.updateTopic(topic, (long) 1);
 
             //get single topic
-            topicController.getTopic((long)1);
+            //topicController.getTopic((long)1);
             
 
         //Then
