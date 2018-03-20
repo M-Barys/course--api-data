@@ -7,22 +7,21 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>To do created</title>
+    <title>New task created</title>
 </head>
 <body>
-<h1>New task created!</h1>
 <div class="container">
-    <h2 th:text="'Id: ' + ${topic.id}" />
-    <h2 th:text="'Name: ' + ${topic.name}" />
-    <h2 th:text="'Description: ' + ${topic.description}" />
+    <h2>New task created!</h2>
+    <div >
+        <h4 th:text="'Id: ' + ${topic.id}" />
+        <h4 th:text="'Name: ' + ${topic.name}" />
+        <h4 th:text="'Description: ' + ${topic.description}" />
+    </div>
+    <div >
+        <a th:href="${'/topics'}" class="btn btn-primary" role="button">Submit another task</a>
+        <a th:href="${'/todolist'}" class="btn btn-primary" role="button">Tasks list</a>
+    </div>
 
-    <h2> <form action="/topics">
-        <input type="submit" value="Submit another task" />
-    </form>
-    <form action="/todolist">
-        <input type="submit" value="ToDo List" />
-    </form>
-    </h2>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
