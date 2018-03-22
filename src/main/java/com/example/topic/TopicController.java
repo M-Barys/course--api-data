@@ -1,9 +1,12 @@
 package com.example.topic;
 
+import com.example.topic.mapping.TopicMapFormToObj;
+import com.example.topic.mapping.TopicMapObjToForm;
+import com.example.topic.model.Topic;
+import com.example.topic.model.TopicForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,32 +15,31 @@ import javax.validation.Valid;
 @Controller
 public class TopicController {
 
-    private TopicToTopicForm topicToTopicForm;
+    @Autowired
+    private TopicMapObjToForm topicMapObjToForm;
 
     @Autowired
-    public void setTopicToTopicForm(TopicToTopicForm topicToTopicForm) {
-        this.topicToTopicForm = topicToTopicForm;
-    }
+    private TopicMapFormToObj topicMapFormToObj;
 
-  @Autowired
-  private TopicService topicService;
+    @Autowired
+    private TopicService topicService;
 
 
     @GetMapping("/topics")
-    public String todoform(Model model){
-        model.addAttribute("topicForm",new TopicForm());
+    public String todoform(Model model) {
+        model.addAttribute("topicForm", new TopicForm());
         return "todoform";
     }
 
     @PostMapping("/topics")
-    public String addTopic(@ModelAttribute @Valid TopicForm topicForm, Errors errors, Model model){
+    public String addTopic(@ModelAttribute @Valid TopicForm topicForm, Errors errors, Model model) {
 
-        if(errors.hasErrors()){
+        if (errors.hasErrors()) {
             model.addAttribute("topicForm", topicForm);
             return "todoform";
         }
-
-        Topic savedTopic = topicService.saveOrUpdateTopicForm(topicForm);
+        Topic toAdd = topicMapFormToObj.convert(topicForm);
+        Topic savedTopic = topicService.saveOrUpdateTopicForm(toAdd);
         return "redirect:/topics/show/" + savedTopic.getId();
     }
 
@@ -48,15 +50,15 @@ public class TopicController {
     }
 
     @RequestMapping("/todolist")
-    public String getAllTopics(Model model){
+    public String getAllTopics(Model model) {
         model.addAttribute("topics", topicService.getAllTopics());
         return "todo";
     }
 
     @RequestMapping("/topics/edit/{id}")
-    public String getTopic(@PathVariable Long id, Model model){
+    public String getTopic(@PathVariable Long id, Model model) {
         Topic topic = topicService.getTopic(id);
-        TopicForm topicForm = topicToTopicForm.convert(topic);
+        TopicForm topicForm = topicMapObjToForm.convert(topic);
 
         model.addAttribute("topicForm", topicForm);
         return "todoform";
