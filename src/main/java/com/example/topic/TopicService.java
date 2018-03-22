@@ -19,7 +19,6 @@ public class TopicService {
     this.topicFormToTopic=topicFormToTopic;
     }
 
-
     public List<Topic> getAllTopics() {
         return Lists.newArrayList(topicRepository.findAll());
     }

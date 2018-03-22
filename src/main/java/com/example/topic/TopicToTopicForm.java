@@ -12,7 +12,6 @@ public class TopicToTopicForm implements Converter<Topic, TopicForm> {
         topicForm.setId(topic.getId());
         topicForm.setName(topic.getName());
         topicForm.setDescription(topic.getDescription());
-
         return topicForm;
     }
 }

@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class TopicController {
@@ -27,14 +30,14 @@ public class TopicController {
     }
 
     @PostMapping("/topics")
-    public String addTopic(@ModelAttribute TopicForm topicForm, BindingResult bindingResult){
+    public String addTopic(@ModelAttribute @Valid TopicForm topicForm, Errors errors, Model model){
 
-        if(bindingResult.hasErrors()){
-            return "productform";
+        if(errors.hasErrors()){
+            model.addAttribute("topicForm", topicForm);
+            return "todoform";
         }
 
         Topic savedTopic = topicService.saveOrUpdateTopicForm(topicForm);
-
         return "redirect:/topics/show/" + savedTopic.getId();
     }
 

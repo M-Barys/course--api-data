@@ -1,8 +1,10 @@
 package com.example.topic;
 
 import lombok.Data;
+import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 @Entity //@Data
 public class Topic {

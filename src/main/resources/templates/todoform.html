@@ -11,23 +11,20 @@
 </head>
 
 <body>
-<form th:object="${topicForm}" th:action="@{/topics}" method="post">
+<form th:object="${topicForm}" th:action="@{/topics}" method="post" >
+    <input type="hidden" th:field="*{id}">
     <div class="form-group">
         <div class="col-sm-3">
-            <label for="exampleId">Id</label>
-            <input type="text" class="form-control" id="exampleId"  placeholder="Enter id" th:field="*{id}">
+            <label th:for="name">Name</label>
+            <input class="form-control" placeholder="Enter name" th:field="*{name}">
+            <span style="color:red" th:errors="*{name}" class="small"></span>
         </div>
     </div>
     <div class="form-group">
         <div class="col-sm-3">
-            <label for="exampleName">Name</label>
-            <input type="text" class="form-control" id="exampleName"  placeholder="Enter name" th:field="*{name}">
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-sm-3">
-            <label for="exampleDescription">Description</label>
-            <input type="text" class="form-control" id="exampleDescription" placeholder="Enter Description" th:field="*{description}">
+            <label th:for="description">Description</label>
+            <input class="form-control" placeholder="Enter Description" th:field="*{description}">
+            <span style="color:red" th:errors="*{description}" class="small"></span>
         </div>
     </div>
         <div class="col-sm-3">
