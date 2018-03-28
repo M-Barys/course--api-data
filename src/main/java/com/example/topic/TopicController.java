@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.validation.Valid;
 
 @Controller
@@ -70,6 +71,13 @@ public class TopicController {
 
         model.addAttribute("topics", topicService.getAllTopics());
         return "todo";
+    }
+
+    @RequestMapping("/topics/filter/{name}")
+    public String filterName(@PathVariable String name, Model model){
+        model.addAttribute("topics", topicService.filterName(name));
+        System.out.println(topicService.filterName(name));
+        return"todo";
     }
 
 }

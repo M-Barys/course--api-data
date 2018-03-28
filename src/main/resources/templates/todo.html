@@ -9,7 +9,47 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>My todo list</title>
+    <style>
 
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 6px;
+    font-size: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 12px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 2px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd}
+
+.show {display:block;}
+</style>
 </head>
 <body>
 <div class="container">
@@ -19,7 +59,17 @@
             <thead>
             <tr>
                 <th style="width: 7%">Id</th>
-                <th style="width: 17%">Name</th>
+                <th style="width: 17%">Name
+                    <div class="dropdown">
+                        <button onclick="myFunction()" class="dropbtn">F<span class="glyphicon glyphicon-envelope"></span></button>
+                        <div id="myDropdown" class="dropdown-content" >
+                            <a style="background-color: grey"  th:href="${'/todolist'}">All tasks</a>
+                            <div th:each="topic : ${topics}">
+                            <a  th:href="${'/topics/filter/' + topic.name}" th:text="${topic.name}"></a>
+                            </div>
+                        </div>
+                    </div>
+                </th>
                 <th style="width: 60%">Description</th>
                 <th style="width: 8%"></th>
                 <th style="width: 8%"></th>
@@ -39,9 +89,31 @@
 </div>
     <div >
     <a th:href="${'/topics'}" class="btn btn-primary" role="button">Submit another task</a>
-    </div>
+     </div>
 </div>
 
+<script>
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
