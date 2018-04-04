@@ -80,4 +80,10 @@ public class TopicController {
         return"todo";
     }
 
+    @RequestMapping("/{buttonlist}")
+    public  void filterButton(Model model){
+        model.addAttribute("buttonlist", topicService.filterButton());
+        System.out.println(topicService.filterButton());
+        //return "todo";
+    }
 }
