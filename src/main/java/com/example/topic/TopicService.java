@@ -6,7 +6,12 @@ import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 
 @Service
 public class TopicService {
@@ -42,6 +47,17 @@ public class TopicService {
              .filter(p -> name.equals(p.getName()) )
              .collect(Collectors.toList());
        }
+     public List<Topic> filterButton(){
+        List<Topic> buttonlist = getAllTopics().stream()
+                .filter(distinctByKey(Topic::getName))
+                .collect(Collectors.toList());
+        return(buttonlist);
+              }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T,Object> keyExtractor) {
+        Map<Object,String> seen = new ConcurrentHashMap<>();
+        return t -> seen.put(keyExtractor.apply(t), "") == null;
+    }
 
  }
 
