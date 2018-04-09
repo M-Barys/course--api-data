@@ -53,6 +53,7 @@ public class TopicController {
     @RequestMapping("/todolist")
     public String getAllTopics(Model model) {
         model.addAttribute("topics", topicService.getAllTopics());
+        model.addAttribute("buttonlist", topicService.filterButton());
         return "todo";
     }
 
@@ -68,22 +69,17 @@ public class TopicController {
     @RequestMapping("/topics/delete/{id}")
     public String deleteTopic(@PathVariable Long id, Model model) {
         topicService.deleteTopic(id);
-
         model.addAttribute("topics", topicService.getAllTopics());
+        model.addAttribute("buttonlist", topicService.filterButton());
         return "todo";
     }
 
     @RequestMapping("/topics/filter/{name}")
     public String filterName(@PathVariable String name, Model model){
         model.addAttribute("topics", topicService.filterName(name));
+        model.addAttribute("buttonlist", topicService.filterButton());
         System.out.println(topicService.filterName(name));
         return"todo";
     }
 
-    @RequestMapping("/{buttonlist}")
-    public  void filterButton(Model model){
-        model.addAttribute("buttonlist", topicService.filterButton());
-        System.out.println(topicService.filterButton());
-        //return "todo";
-    }
 }

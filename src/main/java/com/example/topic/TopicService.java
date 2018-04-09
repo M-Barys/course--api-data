@@ -38,7 +38,7 @@ public class TopicService {
 
     public Topic saveOrUpdateTopicForm(Topic topic) {
         Topic savedTopic = addTopic(topic);
-        System.out.println("Saved Product Id: " + savedTopic.getId());
+        //System.out.println("Saved Product Id: " + savedTopic.getId());
         return savedTopic;
     }
 
@@ -48,10 +48,9 @@ public class TopicService {
              .collect(Collectors.toList());
        }
      public List<Topic> filterButton(){
-        List<Topic> buttonlist = getAllTopics().stream()
-                .filter(distinctByKey(Topic::getName))
-                .collect(Collectors.toList());
-        return(buttonlist);
+         return getAllTopics().stream()
+                 .filter(distinctByKey(Topic::getName))
+                 .collect(Collectors.toList());
               }
 
     public static <T> Predicate<T> distinctByKey(Function<? super T,Object> keyExtractor) {

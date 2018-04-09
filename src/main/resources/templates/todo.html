@@ -64,7 +64,7 @@
                         <button onclick="myFunction()" class="dropbtn" >F<span class="glyphicon glyphicon-envelope"></span></button>
                         <div id="myDropdown" class="dropdown-content" >
                             <a style="background-color: grey"  th:href="${'/todolist'}">All tasks</a>
-                            <div th:each="topic : ${topics}">
+                            <div th:each="topic : ${buttonlist}">
                             <a  th:href="${'/topics/filter/' + topic.name}" th:text="${topic.name}"></a>
                             </div>
                         </div>
